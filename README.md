@@ -5,3 +5,12 @@ is an industry standard format for the output of static analysis tools.
 
 [Website](https://sarifweb.azurewebsites.net/)
 [Schema](https://docs.oasis-open.org/sarif/sarif/v2.0/csprd02/schemas/sarif-schema-2.1.0.json)
+
+### Build
+
+```shell script
+chmod +x get-schema.sh
+./get-schema.sh
+./gradlew generateJsonSchema2Pojo
+./gradlew build
+```
