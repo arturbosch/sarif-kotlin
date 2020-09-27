@@ -12,3 +12,6 @@ build/
 # Kotlin test
 .kotlintest/
 
+# schema
+src/main/resources/json/sarif-schema-2.1.0.json
+
