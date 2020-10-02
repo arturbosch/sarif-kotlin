@@ -1,1 +1,1 @@
-rootProject.name = "sarif-tools"
+rootProject.name = "sarif4j"

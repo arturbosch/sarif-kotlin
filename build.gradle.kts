@@ -1,17 +1,17 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 plugins {
+    `java-library`
     kotlin("jvm") version Versions.kotlin
     id(Deps.json_scheme_generator) version Versions.js2p
 }
 
 dependencies {
-    implementation(kotlin("stdlib"))
     implementation(Deps.moshi)
-    implementation(Deps.`moshi-adapters`)
+    implementation(Deps.moshi_adapters)
 
-    testImplementation(Deps.kotest.runner)
-    testImplementation(Deps.kotest.assertions)
+    testImplementation(kotlin("stdlib"))
+    testImplementation(Deps.junit)
+    testImplementation(Deps.jsonpath)
+    testImplementation(Deps.assertj)
 }
 
 sourceSets["main"].java {
@@ -19,16 +19,16 @@ sourceSets["main"].java {
 }
 
 allprojects {
-    group = "space.dector.${rootProject.name}"
-    version = "0.1-SNAPSHOT"
+    group = "io.github.detekt.${rootProject.name}"
+    version = "1.0.0"
 
     repositories {
-        jcenter()
+        mavenCentral()
     }
 
-    tasks.withType<KotlinCompile> {
-        kotlinOptions.jvmTarget = "1.8"
-        kotlinOptions.freeCompilerArgs += "-Xopt-in=kotlin.RequiresOptIn"
+    java {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
 }
 
@@ -37,6 +37,6 @@ val test by tasks.getting(Test::class) {
 }
 
 jsonSchema2Pojo {
-    targetPackage = "space.dector.sarif"
+    targetPackage = "io.github.detekt.sarif4j"
     setAnnotationStyle(org.jsonschema2pojo.AnnotationStyle.MOSHI1.toString())
 }
