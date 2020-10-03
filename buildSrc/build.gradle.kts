@@ -11,3 +11,7 @@ repositories {
 sourceSets["main"].withConvention(KotlinSourceSet::class) {
     kotlin.srcDir("src/")
 }
+
+kotlinDslPluginOptions {
+    experimentalWarning.set(false)
+}
