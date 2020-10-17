@@ -5,6 +5,7 @@ import java.nio.file.Files
 plugins {
     `java-library`
     `maven-publish`
+    signing
     kotlin("jvm") version Versions.kotlin
     id(Deps.json_scheme_generator) version Versions.js2p
 }
@@ -118,5 +119,11 @@ publishing {
                 url.set("https://github.com/detekt/sarif4j")
             }
         }
+    }
+}
+
+if (findProperty("signing.keyId") != null) {
+    signing {
+        sign(publishing.publications[rootProject.name])
     }
 }
