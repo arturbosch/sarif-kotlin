@@ -1,3 +1,7 @@
+import com.github.eirnym.js2p.GenerateJsonSchemaJavaTask
+import java.net.URL
+import java.nio.file.Files
+
 plugins {
     `java-library`
     `maven-publish`
@@ -34,7 +38,7 @@ java {
 }
 
 tasks.withType(Javadoc::class).configureEach {
-    val customArgs = buildDir.resolve("javadoc-silence.txt")
+    val customArgs = projectDir.resolve("javadoc-silence.txt")
     customArgs.writeText("""
         -Xdoclint:none
     """.trimIndent())
@@ -43,6 +47,23 @@ tasks.withType(Javadoc::class).configureEach {
 
 tasks.withType(Test::class).configureEach {
     useJUnitPlatform()
+}
+
+val getSchema by tasks.registering {
+    val schemaFile = projectDir.resolve("src/main/resources/json/sarif-schema-2.1.0.json").toPath()
+
+    outputs.file(schemaFile)
+
+    doLast {
+        val schema = URL("https://raw.githubusercontent.com/oasis-tcs/sarif-spec/master/Schemata/sarif-schema-2.1.0.json")
+            .openStream()
+            .readBytes()
+        Files.write(schemaFile, schema)
+    }
+}
+
+tasks.withType<GenerateJsonSchemaJavaTask>().configureEach {
+    dependsOn(getSchema)
 }
 
 jsonSchema2Pojo {

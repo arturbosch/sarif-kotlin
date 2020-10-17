@@ -9,8 +9,10 @@ is an industry standard format for the output of static analysis tools.
 ### Build
 
 ```shell script
-chmod +x get-schema.sh
-./get-schema.sh
-./gradlew generateJsonSchema2Pojo
 ./gradlew build
 ```
+
+The build consists of three steps:
+1. Getting the schema file via `getSchema` task
+2. Building the models via `generateJsonSchema2Pojo` task
+3. Compiling the `SarifJsonWriter` helpers
