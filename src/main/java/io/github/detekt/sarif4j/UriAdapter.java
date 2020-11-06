@@ -8,7 +8,6 @@ import com.squareup.moshi.ToJson;
 
 import java.io.IOException;
 import java.net.URI;
-import java.util.Objects;
 
 public class UriAdapter extends JsonAdapter<URI> {
 
@@ -25,7 +24,6 @@ public class UriAdapter extends JsonAdapter<URI> {
     @Override
     @ToJson
     public void toJson(JsonWriter writer, URI value) throws IOException {
-        Objects.requireNonNull(value);
-        writer.value(value.toString());
+        writer.value(value == null ? "null" : value.toString());
     }
 }
