@@ -69,6 +69,7 @@ tasks.withType<GenerateJsonSchemaJavaTask>().configureEach {
 
 jsonSchema2Pojo {
     targetPackage = "io.github.detekt.sarif4j"
+    initializeCollections = false
     setAnnotationStyle(org.jsonschema2pojo.AnnotationStyle.MOSHI1.toString())
 }
 
