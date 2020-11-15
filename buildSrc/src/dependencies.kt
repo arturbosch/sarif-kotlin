@@ -9,6 +9,7 @@ object Deps {
 object Versions {
     const val kotlin = "1.4.10"
     const val js2p = "1.0"
+    const val nexus = "0.22.0"
     const val jackson = "2.12.0-rc2"
     const val junit = "5.7.0"
     const val jsonpath = "4.3.1"

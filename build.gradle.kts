@@ -8,6 +8,7 @@ plugins {
     signing
     kotlin("jvm") version Versions.kotlin
     id(Deps.json_scheme_generator) version Versions.js2p
+    id("io.codearte.nexus-staging") version Versions.nexus
 }
 
 dependencies {
@@ -117,6 +118,13 @@ publishing {
                     distribution.set("repo")
                 }
             }
+            developers {
+                developer {
+                    id.set("Artur Bosch")
+                    name.set("Artur Bosch")
+                    email.set("arturbosch@gmx.de")
+                }
+            }
             scm {
                 url.set("https://github.com/detekt/sarif4j")
             }
@@ -128,4 +136,11 @@ if (findProperty("signing.keyId") != null) {
     signing {
         sign(publishing.publications[rootProject.name])
     }
+}
+
+nexusStaging {
+    packageGroup = "io.github.detekt"
+    stagingProfileId = "117c7a00a4d531"
+    username = sonatypeUsername
+    password = sonatypePassword
 }
