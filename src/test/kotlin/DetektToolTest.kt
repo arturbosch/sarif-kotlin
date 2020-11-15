@@ -1,4 +1,4 @@
-import io.github.detekt.sarif4j.MoshiSarifJsonWriter
+import io.github.detekt.sarif4j.JacksonSarifWriter
 import io.github.detekt.sarif4j.Run
 import io.github.detekt.sarif4j.SarifSchema210
 import io.github.detekt.sarif4j.Tool
@@ -35,7 +35,7 @@ class DetektToolTest {
             )
         }
 
-        val result = MoshiSarifJsonWriter().toJson(report)
+        val result = JacksonSarifWriter().toJson(report)
         val jsonPath = JsonPath.from(result)
 
         assertThat(jsonPath.getString("runs[0].tool.driver.name")).isEqualTo("detekt")
